@@ -1,0 +1,7 @@
+#!/bin/bash
+pdflatex lai
+pdflatex lai
+bibtex lai
+pdflatex lai
+pdflatex lai
+

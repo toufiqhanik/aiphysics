@@ -1,0 +1,367 @@
+\documentclass[prd,amsmath,aps,floats,amssymb, floatfix,
+  superscriptaddress,nofootinbib]{revtex4-1}
+%% removed linenumbers
+
+
+\usepackage{amsmath,amssymb,natbib,latexsym,times}
+%\usepackage{ulem} % remove before resubmission
+
+\DeclareMathOperator\arctanh{arctanh}
+\usepackage[switch,columnwise]{lineno}
+\renewcommand{\topfraction}{0.99}
+% To solve problem with mnras not understanding Type 3 fonts
+\usepackage[T1]{fontenc}
+\usepackage{aecompl}
+\newcommand{\mr}{\mathrm}
+%%%% Scott's macros
+\newcommand{\sfig}[2]{
+\includegraphics[width=#2]{#1}
+        }
+\newcommand{\Sfig}[2]{
+    \begin{figure}[thbp]
+    \sfig{Figures/#1.pdf}{.7\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+    \end{figure}
+}
+\newcommand{\Swide}[2]{
+\begin{figure*}[thbp]
+ \sfig{Figures/#1.pdf}{.8\textwidth}
+  \caption{{\small #2}}
+   \label{fig:#1}
+   \end{figure*}
+}
+\newcommand{\Sswide}[2]{
+\begin{figure*}[thbp]
+ \sfig{Figures/#1.pdf}{.7\textwidth}
+  \caption{{\small #2}}
+   \label{fig:#1}
+   \end{figure*}
+}
+\newcommand{\Svwide}[2]{
+\begin{figure*}[thbp]
+ \sfig{Figures/#1.pdf}{\textwidth}
+  \caption{{\small #2}}
+   \label{fig:#1}
+   \end{figure*}
+}
+
+\newcommand{\Spng}[2]{
+    \begin{figure}[thbp]
+    \sfig{Figures/#1.png}{0.65\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+    \end{figure}
+}
+\newcommand{\Rf}[1]{\ref{fig:#1}}
+\newcommand{\rf}[1]{\ref{fig:#1}}
+\newcommand{\ec}[1]{Eq.~(\ref{eq:#1})}
+\newcommand{\ecalt}[1]{Eq.~\ref{eq:#1}}
+\newcommand{\Ec}[1]{(\ref{eq:#1})}
+\newcommand{\eeec}[3]{Eqs.~(\ref{eq:#1}, \ref{eq:#2}, \ref{eq:#3})}
+\newcommand{\eql}[1]{\label{eq:#1}}
+\def\vs{\nonumber\\}
+
+
+% For various journals
+\newcommand{\aap}{A\&A}
+\newcommand{\apjs}{ApJS}
+\newcommand{\aj}{A.J.}
+\newcommand{\mnras}{MNRAS}
+\newcommand{\physrev}{Phys. Rev.}
+\newcommand{\advastro}{Adv. Astron.}
+\newcommand{\jcap}{JCAP}
+\newcommand{\apjl}{ApJ}
+
+
+\usepackage{verbatim}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tabulary}
+\usepackage{tabularx}
+\usepackage{todonotes}
+\usepackage{hyperref}
+%\usepackage[draft]{hyperref}
+%\usepackage[disable]{todonotes}
+
+% Make equations look like 2.1, 2.2, etc.
+\numberwithin{equation}{section}
+
+% Make LaTex more likely to put some text under the figures.
+\renewcommand\dbltopfraction{.85}
+%\renewcommand\topfraction{.85}
+\renewcommand\textfraction{0.1}
+\renewcommand{\floatpagefraction}{0.7}
+\renewcommand{\dblfloatpagefraction}{0.7}
+
+\newcommand{\assign}[1]{\noindent {\color{RoyalPurple} Lead writer: \textbf{#1}}}
+\newcommand{\contrib}[1]{{\color{RoyalPurple} with contributions from \textbf{#1}}}
+% \newcommand{\assign}[1]{}
+% \newcommand{\contrib}[1]{}
+
+% Number of galaxies in the final catalogs in millions
+\newcommand{\ngalngmix}{3.44}
+\newcommand{\ngalimshape}{2.12}
+% Our resulting neff values
+\newcommand{\neffngmix}{5.7}
+\newcommand{\neffimshape}{3.7}
+
+\newcommand{\mrequirement}{0.03}
+\newcommand{\crequirement}{\ensuremath{2 \times 10^{-3}}}
+\newcommand{\tanshearbias}{0.05}
+
+\newcommand\salpha{{\eta_{\rm IA}}}
+\newcommand{\greatdes}{GREAT-DES}
+\newcommand{\healpix}{HEALPIX}
+\newcommand{\fits}{FITS}
+\newcommand{\meds}{MEDS}
+\newcommand{\medsfull}{Multi-Epoch Data Structures}
+\newcommand{\SE}{single-epoch}
+\newcommand{\ME}{multi-epoch}
+\newcommand{\medszero}{30.0}
+\newcommand{\uberseg}{{\"u}berseg}
+
+\newcommand{\gband}{$g$-band}
+\newcommand{\rband}{$r$-band}
+\newcommand{\iband}{$i$-band}
+\newcommand{\zband}{$z$-band}
+\newcommand{\Yband}{$Y$-band}
+\newcommand{\grizY}{$g$, $r$, $i$, $z$, $Y$}
+
+\newcommand{\photoz}{photo-$z$}
+\newcommand\degree{\ensuremath{\,^\circ}}
+\newcommand{\snr}{\ensuremath{S/N}}
+\newcommand{\snrw}{\ensuremath{(S/N)_w}}
+\newcommand{\snrr}{\ensuremath{(S/N)_r}}
+\newcommand{\rgp}{\ensuremath{R_{gp}/R_p}}
+\newcommand{\epsf}{\ensuremath{e_\textsc{psf}}}
+\newcommand{\Tpsf}{\ensuremath{T_\textsc{psf}}}
+\newcommand{\Tgal}{\ensuremath{T_\mathrm{gal}}}
+\newcommand{\bfx}{\ensuremath{\mathbf{x}}}
+\newcommand{\bfxpt}{\ensuremath{\mathbf{x} + \boldsymbol{\theta}}}
+\newcommand{\dximax}{\ensuremath{\delta \xi^\mathrm{max}}}
+\newcommand{\SN}{\ensuremath{\sigma_\textsc{sn}}}
+\newcommand\lcdm{$\Lambda$CDM}
+\newcommand\wcdm{$w$CDM}
+
+% cf. http://tex.stackexchange.com/questions/299/how-to-get-long-texttt-sections-to-break
+\newcommand*\justify{%
+  \fontdimen2\font=0.4em% interword space
+  \fontdimen3\font=0.2em% interword stretch
+  \fontdimen4\font=0.1em% interword shrink
+  \fontdimen7\font=0.1em% extra space
+  \hyphenchar\font=`\-% allowing hyphenation
+}
+
+% how to display code snippets
+\newcommand\code[1]{\texttt{\small\justify #1}}
+
+% sextractor stuff
+\newcommand{\sex}{\textsc{SEx\-tractor}}
+\newcommand{\psfex}{\textsc{PSF\-Ex}}
+\newcommand{\aworld}{\code{A\_WORLD}}
+\newcommand{\bworld}{\code{B\_WORLD}}
+\newcommand{\frad}{\code{FLUX\_RADIUS}}
+\newcommand{\magauto}{\code{MAG\_AUTO}}
+\newcommand{\magpsf}{\code{MAG\_PSF}}
+\newcommand{\classstar}{\code{CLASS\_STAR}}
+\newcommand{\spreadmodel}{\code{SPREAD\_MODEL}}
+
+\DeclareMathOperator{\Tr}{Tr}
+
+% names of codes
+\newcommand{\imshape}{{\textsc{im3shape}}}
+\newcommand{\ngmix}{\textsc{ngmix}}
+\newcommand{\galsim}{\textsc{GalSim}}
+\newcommand{\LevMar}{\textsc{LevMar}}
+\newcommand{\scamp}{\textsc{SCamp}}
+\newcommand{\swarp}{\textsc{SWarp}}
+\newcommand{\lensfit}{\textsc{lensfit}}
+\newcommand\metacal{{\textsc{metacalibration}}} %{{\tt metacal}}
+\newcommand\im{{\textsc{im3shape}}} %{{\tt im3shape}}
+
+\newcommand{\ngmixSN}{0.22}
+\newcommand{\ngmixbands}{$r,i,z$}
+\newcommand{\vece}{\mbox{\boldmath $e$}}
+\newcommand{\vecg}{\mbox{\boldmath $g$}}
+
+\newcommand{\coadd}{coadd}
+
+% disc or disk?
+\newcommand{\disk}{disc}
+
+% nominal epochs and depth for main survey
+\newcommand{\nomepochs}{10}
+\newcommand{\nomdepth}{24.1}
+
+% spt-e stuff
+\newcommand{\spte}{SPT-E}
+\newcommand{\sptearea}{139}
+
+% models
+\newcommand{\devauc}{de Vaucouleurs}
+\newcommand{\sersic}{S{\'e}rsic}
+
+\newcommand{\neldermead}{Nelder-Mead}
+\newcommand{\levmar}{Levenberg-Marquardt}
+
+% regularize how we refer to equations.
+% NB. for 2 equations, use eqnb, since eqn2 is not a valid command name.
+\newcommand\eqn[1]{equation~\ref{#1}}
+\newcommand\eqnb[2]{equations~\ref{#1}~\& \ref{#2}}
+\newcommand\eqnc[2]{equations~\ref{#1}~--~\ref{#2}}
+\newcommand\Eqn[1]{Equation~\ref{#1}}   % If you need to start a sentence with this...
+\newcommand\Eqnb[2]{Equations~\ref{#1}~\& \ref{#2}}
+
+
+% Likewise for figures and tables
+\newcommand\fig[1]{Figure~\ref{#1}}
+\newcommand\figb[2]{Figures~\ref{#1}~\& \ref{#2}}
+\newcommand\tab[1]{Table~\ref{#1}}
+\newcommand\tabb[2]{Tables~\ref{#1}~\& \ref{#2}}
+
+% Some styles doesn't need the word Appendix before the \ref.  So this way it is easy to switch.
+\newcommand\app[1]{Appendix~\ref{#1}}
+%\newcommand\app[1]{\ref{#1}}
+
+
+\newcommand\be{\begin{equation}}
+\newcommand\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}
+\def\eea{\end{eqnarray}}
+% Feel free to add your own \note item with a different color.
+% It's a handy way to comment on particular locations in the
+% text.  
+% (Note: the !40 just makes it a little transparent, so easier to read the black text.)
+\newcommand\noteol[1]{\todo[color=cyan!40, inline, size=\small]{Ofer: #1}}
+\newcommand\scott[1]{\todo[color=blue!40, inline, size=\small]{Scott: #1}}
+\newcommand\ESS[1]{\todo[color=orange!40, inline, size=\small]{ESS: #1}}
+\newcommand\ADW[1]{\todo[color=green!40, inline, size=\small]{ADW: #1}}
+\newcommand\TK[1]{\todo[color=magenta!40, inline, size=\small]{TK: #1}}
+\newcommand\MAT[1]{\todo[color=yellow!40, inline, size=\small]{MAT: #1}}
+\newcommand\AAP[1]{\todo[color=cyan!60, inline, size=\small]{AAP: #1}}
+\newcommand\PM[1]{\todo[color=blue!40, inline, size=\small]{PM: #1}}
+\newcommand\GB[1]{\todo[color=red!10, inline, size=\small]{GB: #1}}
+\newcommand\DG[1]{\todo[color=green!60, inline, size=\small]{DG: #1}}
+\newcommand\ER[1]{\todo[color=magenta!60, inline, size=\small]{ER: #1}}
+\newcommand\JF[1]{\todo[color=red!40, inline, size=\small]{JF: #1}}
+\newcommand\EB[1]{\todo[color=teal!40, inline, size=\small]{EB: #1}}
+\newcommand\dragan[1]{\todo[color=pink!60, inline, size=\small]{DH: #1}}
+\newcommand\notenm[1]{\todo[color=purple!40, inline, size=\small]{NM: #1}}
+\newcommand\notear[1]{\todo[color=green!20, inline, size=\small]{AR: #1}}
+\newcommand\notesb[1]{\todo[color=pink, inline, size=\small]{SLB: #1}}
+\newcommand\notess[1]{\todo[color=purple!20, inline, size=\small]{SS: #1}}
+\newcommand\noteek[1]{\todo[color=green!20, inline, size=\small]{EK: #1}}
+\newcommand\noteaf[1]{\todo[color=pink!20, inline, size=\small]{AF: #1}}
+\newcommand\jab[1]{\todo[color=green!40, inline, size=\small]{JAB: #1}}
+% notes that have been (hopefully) resolved ... same command with an 'R' at the end, and white
+
+\newcommand\ERR[1]{\todo[color=white!60, inline, size=\small]{ER: #1}}
+\newcommand\JFR[1]{\todo[color=white!40, inline, size=\small]{JF: #1}}
+\newcommand\noteekR[1]{\todo[color=white!20, inline, size=\small]{EK: #1}}
+\newcommand\noteolR[1]{\todo[color=white!40, inline, size=\small]{Ofer: #1}}
+\newcommand\EBR[1]{\todo[color=white!40, inline, size=\small]{EB: #1}}
+\newcommand\scottR[1]{\todo[color=white!40, inline, size=\small]{Scott: #1}}
+\newcommand\ESSR[1]{\todo[color=white!40, inline, size=\small]{ESS: #1}}
+\newcommand\ADWR[1]{\todo[color=white!40, inline, size=\small]{ADW: #1}}
+\newcommand\TKR[1]{\todo[color=white!40, inline, size=\small]{TK: #1}}
+\newcommand\MATR[1]{\todo[color=white!40, inline, size=\small]{MAT: #1}}
+\newcommand\AAPR[1]{\todo[color=white!60, inline, size=\small]{AAP: #1}}
+\newcommand\PMR[1]{\todo[color=white!40, inline, size=\small]{PM: #1}}
+\newcommand\GBR[1]{\todo[color=white!40, inline, size=\small]{GB: #1}}
+\newcommand\DGR[1]{\todo[color=white!60, inline, size=\small]{DG: #1}}
+\newcommand\DHR[1]{\todo[color=white!60, inline, size=\small]{DH: #1}}
+\newcommand\notenmR[1]{\todo[color=white!40, inline, size=\small]{NM: #1}}
+\newcommand\notearR[1]{\todo[color=white!20, inline, size=\small]{AR: #1}}
+\newcommand\notesbR[1]{\todo[color=white, inline, size=\small]{SLB: #1}}
+\newcommand\notessR[1]{\todo[color=white!20, inline, size=\small]{SS: #1}}
+
+\newcommand\red[1]{\textcolor{Red}{#1}}
+\newcommand\green[1]{\textcolor{Green}{#1}}
+\newcommand\bei{\begin{itemize}}
+\newcommand\eei{\end{itemize}}
+\newcommand\bee{\begin{enumerate}}
+\newcommand\eee{\end{enumerate}}
+
+\newcounter{syscounter}  % So we can continue an enumeration of robustness checks
+
+
+% Note to MNRAS editor: changing this to a no op removes markup for the changes made for
+% the referee report.
+%\newcommand\edit[1]{\textcolor{Red}{#1}}
+\newcommand\edit[1]{#1}
+\newcommand\magenta[1]{\textcolor{Magenta}{#1}}
+
+% allow sets of equations (e.g. using align) to page break
+\allowdisplaybreaks
+
+\begin{document}
+%\linenumbers
+
+\title{AI and Physics: Spring 2021}
+
+%\input{DES-2017-0226_author_list.tex}
+%%%\author{Dark Energy Survey Collaboration}
+
+\date{\today}
+
+%\pubyear{2017}
+
+\maketitle
+
+\section{Computational Imaging}
+
+The speaker this week is Laura Waller, who has made quite a bit of software \href{http://www.laurawaller.com/opensource/}{public}. Doing some of the demos and trying them out on different images would make a good project.
+
+There are several biophysics projects she has been involved in recently, so it makes sense to cover the following topics:
+\bei
+\item Fluorescence
+\item Point Spread Function
+\item Phase Imaging
+\eei
+
+\subsection{Fluorescence}
+
+\Spng{JablonskiSimple}{Energy level diagram used in fluorescent imaging. Photons with energy $h\nu$ are injected into the sample. One of the electrons in the molecule jumps to an excited level, which is highly unstable. However, the fastest way for the electron to drop in energy is via a transition to a lower energy rotational state (in this case ${}^3A$). Since rotational energies are typically much smaller ($\sim10^{-3}$ eV) than orbital transition energies ($\sim 1$ eV), the photon that is emitted when the electron eventually drops down to the ground state has only slightly lower energy.}
+
+A simple example is depicted in the figure. By pumping laser light into a sample, experimenters can observe emitted radiation at slightly lower energies (typically still in the optical range though). Since the decays happen so rapidly (nsec time scales), it is possible to localize the molecules and track their motion. It's even better than that because biophysicists have figured out ways to take known molecules (called ``fluorescent dyes'') and attach them to components of the cell, such as proteins, nuclei, and lipids. So, any part of the cell can be tracked regardless of its molecular structure.
+
+\subsection{From 2D to 3D}
+
+The images are two-dimensional images, but scientists have learned how to extract information about the third dimension, the distance to the object being studied. There are a number of ways to do this, but one \cite{unknown} uses a specially designed mask to make the point spread function (PSF) depend on the radial distance from the detector. The PSF is a ubiquitous concept in optics with ramifications from biophysics to astrophysics. It simply the statement that the true two-dimensional image is related to the observed 2D image via a convolution:
+\be
+I^{\rm obs}(x,y) = \int dx\,dy I^{\rm true}(x',y') P(x-x',y-y').\ee
+A perfect camera under perfect seeing conditions would have a Dirac delta function PSF so the integral would collapse and the observed image would be equal to the true image. This never happens, so to reconstruct the image, one needs to account for the PSF. In the example shown in Fig.~\rf{phasemask}, samples further away would appear smaller than those closer to us, so we would be able to infer the distance to the sample.
+
+\Spng{phasemask}{The PSF varies depending on the distance to the sample.}
+
+This technique therefore enables biologists to get 4D images of the interior of cells (3 space and 1 time). One more comment: when implementing algorithms numerically, the integral in the PSF equation become as matrix equation:
+\be
+I^{\rm obs} = P I^{\rm true}\eql{iobitr}
+.\ee
+As an example, suppose the observed image has a total of $N=100o$ pixels, and you pixelize the true image to have the same number of pixels. Then, both $I$'s are simply vectors with $N$ components. The integration turns into a sum:
+\be
+I^{\rm obs}_i = \sum_j P_{ij} I^{\rm true}_j
+\ee
+while the PSF that connects the 2 intensities is an $N\times N$ matrix.
+Obtaining the true image from the observed image is the inverse problem, and there are a vast number of ways to do this. Just a heads up that many of these ways involve applying a ``cost function.'' 
+
+\subsection{Phase Determination}
+
+Many objects in the body do not emit or block light very much so are very hard to detect. Waller's group has worked on detecting these unseen objects by measuring their ``transmission function.'' Even if the amplitude of this is one so that very little light is stopped, the light can scatter a bit so that the phase changes and clever  clever design~\cite{bostan2020deep} can extract information about the phases -- and therefore about the tissues say between us and the emitting proteins. 
+
+Light is a traveling wave with electric field oscillating in the direction perpendicular to the direction of propagation. As it passes from one material through another, the wave is multiplied by the transmission function:
+\be
+E_{\rm after} = t\times E_{\rm before}
+.\ee
+In biological systems this function --- which is related to the index of refraction -- varies from one position to another. In fact, \ec{iobitr} can be generalized to include the transmission function. The 10,000 foot view is that one can model the observed intensities as a function of the transmission function, the PSF, and the true image and try to get the best fit to real or simulated data. This best fit about the transmission function contains valuable information about the tissues in the body.
+
+\bibliography{refs}
+ 
+ \appendix
+ 
+  
+ \section{AI Terms}\label{sec:unblind}
+ 
+
+\end{document}
+
